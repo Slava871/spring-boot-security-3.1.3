@@ -1,0 +1,23 @@
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>homepage</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+
+    Привет <span sec:authentication="name"></span></br></br>
+
+    <h3>Это ваша персональная страница</h3></br></br>
+
+   Ваша фамилия: <span sec:authentication="principal.lastname"></span></br></br>
+
+   Ваш имейл: <span sec:authentication="principal.email"></span>
+</div></br></br>
+
+
+
+<p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+</body>
+
+</html>

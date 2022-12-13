@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>Регистрация</title>
+</head>
+<body>
+
+<div>
+    <form th:method="POST" th:action="@{/admin/registration}" th:object="${userForm}">
+    <p><h2>Регистрация</h2></p></br>
+            <label for="zx">Enter name</label>
+            <input type="text" th:field="*{username}" id="zx"/>
+        <div style="color:blueviolet" th:text="${usernameError}">error</div>
+        <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> Error</div>
+        <br/>
+        <label for="12">Enter lastname</label>
+        <input type="text" th:field="*{lastname}" id="12"/>
+        <div style="color:blueviolet" th:text="${lastnameError}">error</div>
+        <div style="color:red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"> Error</div>
+        <br/>
+        <label for="23">Enter email</label>
+        <input type="text" th:field="*{email}" id="23"/>
+        <div style="color:blueviolet" th:text="${emailError}">error</div>
+        <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> Error</div>
+        <br/>
+        <label for="passw"> password:   </label>
+        <input type="password" th:field="*{password}" id="passw"/></br>
+
+        <label for="33">Confirm:   </label>
+        <input type="password" th:field="*{passwordConfirm}" id="33"/>
+        <p style="color:blueviolet" th:text="${passwordError}">error</p>
+        <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Error</div><br/>
+        <input type="submit" value="Зарегистрироваться!"/>
+    </form>>
+    <a href="/admin">вернуться на страницу админа</a></br></br>
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+</div>
+
+</body>
+</html>

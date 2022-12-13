@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title>Spring Security Example</title>
+    <title>index</title>
 </head>
 <body>
-<h1>Welcome to Index PAGE!</h1>
+<div sec:authorize="isAuthenticated()">
+    Авторизирован пользователь <span sec:authentication="name"></span></div>
+
+<div>
+    <p sec:authorize="isAnonymous()"><a th:href="@{/login}">войти</a></p>
+    <p sec:authorize="isAnonymous()"><a th:href="@{/registration}">зарегестрироваться</a></p>
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+    <h4><a href="/news">Новости (только пользователь)</a></h4>
+    <h4><a href="/admin">Пользователи (только админ)</a></h4>
+</div>
 
 
 </body>
+
 </html>

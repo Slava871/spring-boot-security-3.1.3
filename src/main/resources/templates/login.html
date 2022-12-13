@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>Log in</title>
+</head>
+<body>
+
+<div>
+        <form action="home" th:action="@{/login}" method="post">
+        <p><h2>Вход в систему</h2></p>
+            <input type="text"  name="username"
+                   placeholder="Username" /> </br>
+            <input type="password"  name="password"
+                   placeholder="Password" /> </br>
+            <input type="submit" value="войти в систему!"></br>
+            <h4><a href="/registration">Зарегистрироваться</a></h4>
+        </form>
+</div>
+
+</body>
+</html>
