@@ -30,18 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf()
-                    .disable()
                 .authorizeRequests()
-                    //Доступ только для не зарегистрированных пользователей
-                //.antMatchers("/registration").not().fullyAuthenticated()
-                    //Доступ только для пользователей с ролью Администратор
                     .antMatchers("/registration").hasRole("ADMIN")
-                    .antMatchers("/admin").hasRole("ADMIN")
-                    .antMatchers("/edit").hasRole("ADMIN")
-                //Доступ только для пользователей с ролью USER
+                    .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/news").hasRole("USER")
-                    //Доступ разрешен всем пользователей
                     .antMatchers("/").hasRole("ADMIN")
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()

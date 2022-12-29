@@ -35,6 +35,12 @@ public class User implements UserDetails {
     @Transient
     private String passwordConfirm;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Role> roles;
+
+    public User() {
+    }
+
     public String getLastname() {
         return lastname;
     }
@@ -49,12 +55,6 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Role> roles;
-
-    public User() {
     }
 
     public Long getId() {

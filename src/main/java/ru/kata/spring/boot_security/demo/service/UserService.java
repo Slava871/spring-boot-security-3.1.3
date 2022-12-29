@@ -20,8 +20,7 @@ import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
-    @PersistenceContext
-    private EntityManager em;
+
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -32,14 +31,11 @@ public class UserService implements UserDetailsService {
         @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Query query = em.createQuery("from User as usr join fetch usr.roles as r where usr.username = :param");
-            query.setParameter("param", username);
-            User user = (User) query.getSingleResult();
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return user;
+            User user = userRepository.findByUsername(username);
+            if (user == null) {
+                throw new UsernameNotFoundException("User not found");
+            }
+            return user;
     }
 
     public User findUserById(Long userId) {
